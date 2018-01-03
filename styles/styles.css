@@ -1,12 +1,37 @@
-.content-wrapper {
-    height: 100vh;
+.app-wrapper {
+    max-height: 500px;
+    height: 500px;
     display: grid;
     grid-gap: 10px;
-        grid-template-columns: 200px 200px 200px;
-        grid-template-areas:
-        "header  header  header"
-        "content content content"
-        "footer  footer  footer";
-        background-color: #fff;
-        color: #444;
+    grid-template-rows: 10% 80% 10%;
+    grid-template-areas: "header" "content" "footer";
+    background-color: #fff;
+    color: #444;
+}
+.content-wrapper {    
+    display: grid;
+    grid-gap: 10px;
+    grid-template-rows: 20% 60% 20%;
+    grid-template-areas: "header" "content" "footer";
+    background-color: #fff;
+    color: #444;
+}
+.date-contents {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 40% 40% 20%;
+    grid-template-areas: 
+        "col1 col2 col3";
+    background-color: #fff;
+    color: #444;
+}
+
+
+.header-wrapper,
+.below-content-wrapper {
+    background-color: bisque;
+}
+.dates-wrapper,
+.hours-sum-wrapper {
+    background-color: beige;
 }
