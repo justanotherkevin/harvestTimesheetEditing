@@ -8,25 +8,50 @@
     background-color: #fff;
     color: #444;
 }
+.user-form {
+    grid-area: userinfo;
+    display: grid;
+    grid-column-gap: 10px;
+    grid-template-columns: .4fr .4fr .2fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: "col1 col2 col3";
+}
 .content-wrapper {    
+    height: 100%;
     display: grid;
     grid-gap: 10px;
-    grid-template-rows: 20% 60% 20%;
-    grid-template-areas: "header" "content" "footer";
-    background-color: #fff;
-    color: #444;
-}
-.date-contents {
-    display: grid;
-    grid-gap: 10px;
-    grid-template-columns: 40% 40% 20%;
+    grid-template-rows: 100px 1fr 100px;
+    grid-template-columns: 2fr 2fr 1fr;
     grid-template-areas: 
-        "col1 col2 col3";
+        "blank1 weekdays blank2" 
+        "userinfo userinfo userinfo" 
+        "footer col-sum total-sum";
     background-color: #fff;
     color: #444;
 }
-
-
+  
+.date-contents {
+    height: 100%;
+    display: grid;
+    grid-column-gap: 10px;
+    grid-template-columns: .4fr .4fr .2fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: "col1 col2 col3";
+    color: #444;
+}
+.day-month-wrapper {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    color: #444;
+}
+.user-form {
+    height: 50px;
+}
+.user-form-input {
+    width: 100%;
+    border: none;
+}
 .header-wrapper,
 .below-content-wrapper {
     background-color: bisque;
