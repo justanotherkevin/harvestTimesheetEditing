@@ -1,0 +1,139 @@
+.app-wrapper {
+    max-height: 500px;
+    height: 500px;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-rows: 10% 80% 10%;
+    grid-template-areas: "header" "content" "footer";
+    background-color: #fff;
+    color: #444;
+}
+.content-wrapper {    
+    height: 100%;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-rows: 100px 1fr 100px;
+    grid-template-columns: 2fr 2fr 1fr;
+    grid-template-areas: 
+        "blank1 weekdays blank2" 
+        "userinfo userinfo userinfo" 
+        "footer col-sum total-sum";
+    background-color: #fff;
+    color: #444;
+}
+.user-form {
+    grid-area: userinfo;
+    display: grid;
+    grid-column-gap: 10px;
+    grid-template-columns: .4fr .4fr .2fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: "col1 col2 col3";
+}
+  
+.date-contents {
+    height: 100%;
+    display: grid;
+    grid-column-gap: 10px;
+    grid-template-columns: .4fr .4fr .2fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: "col1 col2 col3";
+    color: #444;
+}
+.day-month-wrapper {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    color: #444;
+}
+.header-wrapper {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 2fr 2fr 1fr;
+    grid-template-areas: "header-big-dates header-choosy header-choosy";
+}
+.header-wrapper .big-dates {
+    grid-area: header-big-dates;
+}
+.header-wrapper .choosy {
+    grid-area: header-choosy;
+    display: inline-block;
+}
+.header-wrapper .choosy p {
+    display: inline-block;
+    width: 100px;
+}
+.user-form {
+    height: 50px;
+}
+.row-details,
+.user-form-input,
+.total_submit {
+    height: 50px;
+    margin: 0;
+    padding: 0;
+} 
+#task_client p,
+.hours-sum-wrapper div{
+    height: 50px;
+    margin: 0;
+    padding: 1;
+}
+.user-form-input {
+    width: 50px;
+    border: 1px solid #9E9E9E;
+}
+
+.date-wrapper {
+    min-width: 355px;
+}
+
+.header-wrapper,
+.below-content-wrapper {
+    background-color: bisque;
+}
+.dates-wrapper,
+.hours-sum-wrapper {
+    background-color: beige;
+}
+
+
+/* dropdown */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+.dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content p {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content p:hover {
+    background-color: #f1f1f1
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #3e8e41;
+}
