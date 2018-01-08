@@ -1,0 +1,11 @@
+.app-body .header ul {
+    list-style: none;
+}
+.app-body .header ul li {
+    display: inline-block;
+}
+.header-list-wrapper {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 1fr 2fr 1fr 1fr 1fr 1fr;
+}
