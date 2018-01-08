@@ -45,6 +45,23 @@
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
     color: #444;
 }
+.header-wrapper {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 2fr 2fr 1fr;
+    grid-template-areas: "header-big-dates header-choosy header-choosy";
+}
+.header-wrapper .big-dates {
+    grid-area: header-big-dates;
+}
+.header-wrapper .choosy {
+    grid-area: header-choosy;
+    display: inline-block;
+}
+.header-wrapper .choosy p {
+    display: inline-block;
+    width: 100px;
+}
 .user-form {
     height: 50px;
 }
@@ -81,6 +98,10 @@
 
 
 /* dropdown */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
 .dropbtn {
     background-color: #4CAF50;
     color: white;
@@ -89,12 +110,6 @@
     border: none;
     cursor: pointer;
 }
-
-.dropdown {
-    position: relative;
-    display: inline-block;
-}
-
 .dropdown-content {
     display: none;
     position: absolute;
