@@ -336,6 +336,7 @@ const timeData = {
 const possible_users = document.getElementById('possible_users');
 const drop_downbutton = document.getElementById('drop_downbutton');
 const content_info = document.getElementById('content-info');
+let dict = {}
 
 document.addEventListener("DOMContentLoaded", () => {
   for ( let user of usersData.users ) {
@@ -343,32 +344,49 @@ document.addEventListener("DOMContentLoaded", () => {
     var textnode = document.createTextNode( user.first_name + ' ' + user.last_name );
     node.appendChild(textnode);
     node.addEventListener("click", populatePage );
-    possible_users.appendChild(node);
-}
-
+    possible_users.appendChild(node);   
+    }
 });
 
-const populatePage = () => {
-    for ( let entrie of timeData.time_entries ) {
-        const node_wrapper = document.createElement("div");
-        node_wrapper.className ="content-data"
-        const filtedData = [
-            entrie.client.name,
-            entrie.project.name,
-            entrie.task.name,
-            "Role ???",
-            entrie.user.name,
-            entrie.hours,
-        ]
-        for (let data of filtedData ) {
-            var node = document.createElement("p");
-            var textnode = document.createTextNode( data );
-            node.appendChild(textnode);
-            node_wrapper.appendChild(node);
-        }
+const populatePage = () => { 
 
-        content_info.appendChild(node_wrapper);    
-  }
+    orderedByDate();
+
+    for ( let date in dict ) { 
+        const date_and_sum = document.createElement("div");
+        const day_date = document.createElement("p");
+        const day_sum = document.createElement("p");
+
+        day_date.appendChild(document.createTextNode( date ));
+        day_sum.appendChild(document.createTextNode( '099990'));
+        date_and_sum.appendChild(day_date, day_sum);
+
+        content_info.appendChild(date_and_sum);
+
+
+        for ( let project of dict[date] ) {
+            const node_wrapper = document.createElement("div");
+            node_wrapper.className = "content-data";
+            
+            const filtedData = [
+                project.client.name,
+                project.project.name,
+                project.task.name,
+                "Role ???",
+                project.user.name,
+                project.hours
+            ]
+
+            for ( let data of filtedData ) {
+                var node = document.createElement("p");
+                var textnode = document.createTextNode( data );
+                node.appendChild(textnode);
+                node_wrapper.appendChild(node);
+            }
+            
+            content_info.appendChild(node_wrapper);    
+        }
+    }
 }
 
 const appendNewPtagEle = (parentEle, text) => {
@@ -376,4 +394,19 @@ const appendNewPtagEle = (parentEle, text) => {
     var textnode = document.createTextNode( entrie.client.name );
     node_client_name.appendChild(textnode);
     node_wrapper.appendChild(node);
+}
+
+function sortObject(o) {
+    return Object.keys(o).sort().reduce((r, k) => (r[k] = o[k], r), {});
+}
+
+const orderedByDate = () => {
+    for (let entrie of timeData.time_entries ) {
+        if ( dict[entrie.spent_date] ) {
+            dict[entrie.spent_date].push(entrie);
+        } else {
+            dict[entrie.spent_date] = [entrie];
+        }
+    }
+    dict = sortObject(dict);
 }
