@@ -330,42 +330,45 @@ const timeData = {
     "last":"https://api.harvestapp.com/v2/time_entries?page=1&per_page=100"
   }
 }
-
 // onload fetch all users
-// append user into dropdown
 const possible_users = document.getElementById('possible_users');
 const drop_downbutton = document.getElementById('drop_downbutton');
 const content_info = document.getElementById('content-info');
 let dict = {}
 
 document.addEventListener("DOMContentLoaded", () => {
+  
+  // append user into dropdown onload
   for ( let user of usersData.users ) {
     var node = document.createElement("p");
     var textnode = document.createTextNode( user.first_name + ' ' + user.last_name );
     node.appendChild(textnode);
     node.addEventListener("click", populatePage );
     possible_users.appendChild(node);   
-    }
+  }
+
 });
 
 const populatePage = () => { 
 
     orderedByDate();
 
-    for ( let date in dict ) { 
+    for ( let _date in dict ) { 
         const date_and_sum = document.createElement("div");
         const day_date = document.createElement("p");
         const day_sum = document.createElement("p");
 
-        day_date.appendChild(document.createTextNode( date ));
+        appendNewPtagEle(date_and_sum, _date);
+        appendNewPtagEle(date_and_sum, '999999');
+
         day_sum.appendChild(document.createTextNode( '099990'));
-        date_and_sum.appendChild(day_date, day_sum);
+        // date_and_sum.append(day_date, day_sum);
 
         content_info.appendChild(date_and_sum);
 
 
-        for ( let project of dict[date] ) {
-            const node_wrapper = document.createElement("div");
+        for ( let project of dict[_date] ) {
+        const node_wrapper = document.createElement("div");
             node_wrapper.className = "content-data";
             
             const filtedData = [
@@ -390,10 +393,10 @@ const populatePage = () => {
 }
 
 const appendNewPtagEle = (parentEle, text) => {
-    var node_client_name = document.createElement("p");
-    var textnode = document.createTextNode( entrie.client.name );
-    node_client_name.appendChild(textnode);
-    node_wrapper.appendChild(node);
+    var newPtagEle = document.createElement("p");
+    var textnode = document.createTextNode( text );
+    newPtagEle.appendChild(textnode);
+    parentEle.appendChild(newPtagEle);
 }
 
 function sortObject(o) {
@@ -401,7 +404,7 @@ function sortObject(o) {
 }
 
 const orderedByDate = () => {
-    for (let entrie of timeData.time_entries ) {
+    for ( let entrie of timeData.time_entries ) {
         if ( dict[entrie.spent_date] ) {
             dict[entrie.spent_date].push(entrie);
         } else {
