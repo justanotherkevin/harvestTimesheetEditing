@@ -330,14 +330,13 @@ const timeData = {
     "last":"https://api.harvestapp.com/v2/time_entries?page=1&per_page=100"
   }
 }
-// onload fetch all users
 const possible_users = document.getElementById('possible_users');
 const drop_downbutton = document.getElementById('drop_downbutton');
 const content_info = document.getElementById('content-info');
 let dict = {}
 
 document.addEventListener("DOMContentLoaded", () => {
-  
+  // onload fetch all users
   // append user into dropdown onload
   for ( let user of usersData.users ) {
     var node = document.createElement("p");
@@ -355,55 +354,53 @@ const populatePage = () => {
 
     for ( let _date in dict ) { 
         const date_and_sum = document.createElement("div");
-        const day_date = document.createElement("p");
-        const day_sum = document.createElement("p");
-
-        appendNewPtagEle(date_and_sum, _date);
-        appendNewPtagEle(date_and_sum, '999999');
-
-        day_sum.appendChild(document.createTextNode( '099990'));
-        // date_and_sum.append(day_date, day_sum);
-
+        date_and_sum.className = "date-and-hours";
+        let totalHours = 0;
+        
+        appendNewEle(date_and_sum, 'p', _date, 'content-header-date');
+        appendNewEle(date_and_sum, 'p', totalHours, 'content-header-hours');
+        
         content_info.appendChild(date_and_sum);
 
-
         for ( let project of dict[_date] ) {
-        const node_wrapper = document.createElement("div");
-            node_wrapper.className = "content-data";
-            
-            const filtedData = [
-                project.client.name,
-                project.project.name,
-                project.task.name,
-                "Role ???",
-                project.user.name,
-                project.hours
-            ]
-
-            for ( let data of filtedData ) {
-                var node = document.createElement("p");
-                var textnode = document.createTextNode( data );
-                node.appendChild(textnode);
-                node_wrapper.appendChild(node);
-            }
-            
-            content_info.appendChild(node_wrapper);    
+          const node_wrapper = document.createElement("div");
+          node_wrapper.className = "content-data";
+          totalHours += project.hours;
+          
+          const filtedData = [
+            project.client.name,
+            project.project.name,
+            project.task.name,
+            "Role ???",
+            project.user.name,
+            project.hours
+          ]
+          
+          for ( let _data of filtedData ) {
+            appendNewEle(node_wrapper, 'p', _data)
+          }
+          
+          content_info.appendChild(node_wrapper);    
         }
     }
 }
-
-const appendNewPtagEle = (parentEle, text) => {
-    var newPtagEle = document.createElement("p");
-    var textnode = document.createTextNode( text );
+// create p-tag ele to add to parent ele
+const appendNewEle = (_parentEle, _eleTag = 'p', _text, _className = 'none') => {
+    var newPtagEle = document.createElement( _eleTag );
+    if ( _className != 'none' ) {
+      newPtagEle.className = _className;
+    }
+    var textnode = document.createTextNode( _text );
     newPtagEle.appendChild(textnode);
-    parentEle.appendChild(newPtagEle);
+    _parentEle.appendChild(newPtagEle);
 }
-
+// sort obj by key
 function sortObject(o) {
     return Object.keys(o).sort().reduce((r, k) => (r[k] = o[k], r), {});
 }
 
 const orderedByDate = () => {
+    // group project by date
     for ( let entrie of timeData.time_entries ) {
         if ( dict[entrie.spent_date] ) {
             dict[entrie.spent_date].push(entrie);
@@ -411,5 +408,6 @@ const orderedByDate = () => {
             dict[entrie.spent_date] = [entrie];
         }
     }
+    // sort obj by date(key) 
     dict = sortObject(dict);
 }
