@@ -341,7 +341,7 @@ let userWorkingProje = [];
 let userWorkingProjectsName = [];
 
 document.addEventListener("DOMContentLoaded", () => {
-  // onload fetch all users
+  // onload fetch all users`
 
   // append user into dropdown onload
   for ( let user of usersData.users ) {
