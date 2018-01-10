@@ -12,11 +12,17 @@
     grid-template-columns: 1fr 2fr 1fr 1fr 1fr 1fr;
     grid-template-areas: "one two three four five six";
 }
+.date-and-hours {
+    background-color: antiquewhite;
+}
 .content-header-date {
     grid-area: one;
 }
 .content-header-hours {
     grid-area: six;
+}
+.client-names-wrapper {
+    height: 1rem;
 }
 /* dropdown */
 .dropdown {
